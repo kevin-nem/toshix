@@ -73,16 +73,42 @@ const memoryFR = {
   ]
 };
 
-export default function Home() {
-  const [lang, setLang] = useState<'en' | 'fr'>("en");
+function useDarkMode() {
   const [dark, setDark] = useState(false);
 
-  // Sync dark mode with document
+  // On mount: check localStorage or system preference
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      document.documentElement.classList.toggle("dark", dark);
+    const saved = typeof window !== 'undefined' ? localStorage.getItem("theme") : null;
+    const prefersDark = typeof window !== 'undefined' && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (saved === "dark" || (!saved && prefersDark)) {
+      setDark(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setDark(false);
+      document.documentElement.classList.remove("dark");
     }
-  }, [dark]);
+  }, []);
+
+  const toggle = () => {
+    setDark((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+      return next;
+    });
+  };
+
+  return [dark, toggle] as const;
+}
+
+export default function Home() {
+  const [lang, setLang] = useState<'en' | 'fr'>("en");
+  const [dark, toggleDark] = useDarkMode();
 
   const memory = lang === 'en' ? memoryEN : memoryFR;
 
@@ -195,7 +221,7 @@ export default function Home() {
           {lang === 'en' ? 'Français' : 'English'}
         </button>
         <button
-          onClick={() => setDark(d => !d)}
+          onClick={toggleDark}
           className="text-xs px-2 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition font-sans border border-neutral-300 dark:border-neutral-700 flex items-center justify-center"
           aria-label="Toggle dark mode"
         >
