@@ -1,8 +1,7 @@
 "use client";
+
 import { useState } from "react";
-import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const memory = {
   title: "✈️ Memory Note — End of August 2022",
@@ -33,68 +32,62 @@ A few minutes pass. Then her voice breaks the silence:
 
 "Are you awake?"
 
-I glance at my phone, assuming the brightness was disturbing her. I quickly apologize and dim the screen.
+I glanced at my phone, assuming the brightness was disturbing her. I quickly apologized and dimmed the screen.
 
-But then she asks again. And again.
+But then she asked again. And again.
 
-The third time, she pauses — and then asks quietly:
+The third time, she paused — and then asked quietly:
 
 "Do you want to cuddle?"
 
-I freeze for a second. My mind fills with questions.
+I froze for a second. My mind filled with questions.
 
 Cuddle… does she mean just that? Or is there something more behind those words? Is this about comfort? Intimacy? Desire? Or simply not wanting to be alone?
 
-I turn the question over and over in my head in a matter of seconds. So much had happened in the last few hours — a deep, unexpected connection that somehow brought two strangers close in a way neither could have predicted. And now, suspended in the quiet of a rainy Singapore night, she was asking to close that distance even more.`,
-  image: "/memory-flight.jpg", // Place your image in public/memory-flight.jpg or use a placeholder
+I turned the question over and over in my head in a matter of seconds. So much had happened in the last few hours — a deep, unexpected connection that somehow brought two strangers close in a way neither could have predicted. And now, suspended in the quiet of a rainy Singapore night, she was asking to close that distance even more.`,
 };
-
-const navLinks = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#about" },
-  { name: "Blog", href: "#blog" },
-  { name: "Contact", href: "#contact" },
-];
 
 export default function Home() {
   const [dark, setDark] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Toggle dark mode
   const toggleDark = () => {
-    setDark((d) => {
-      if (typeof window !== "undefined") {
-        document.documentElement.classList.toggle("dark", !d);
-      }
-      return !d;
-    });
+    if (typeof window !== "undefined") {
+      document.documentElement.classList.toggle("dark", !dark);
+    }
+    setDark(!dark);
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-white dark:bg-neutral-950 transition-colors duration-300">
-      <div className="w-full max-w-4xl flex flex-col md:flex-row items-center md:items-stretch gap-12 px-4 py-24">
-        {/* Text Section */}
-        <div className="flex-1 flex flex-col justify-center md:justify-center md:items-start items-center text-center md:text-left">
-          <h1 className="text-2xl md:text-3xl font-bold text-purple-700 dark:text-purple-300 mb-4">{memory.title}</h1>
-          <span className="text-sm text-neutral-400 mb-6">{new Date(memory.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long' })}</span>
-          <div className="prose prose-neutral dark:prose-invert text-lg max-w-md whitespace-pre-line">{memory.excerpt}</div>
-        </div>
-        {/* Image Section */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-full max-w-xs aspect-[4/5] relative rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-            <Image
-              src={memory.image}
-              alt={memory.title}
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-              placeholder="blur"
-              blurDataURL="data:image/svg+xml,%3Csvg width='400' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23e5e7eb' width='400' height='500'/%3E%3C/svg%3E"
-            />
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-purple-50 to-yellow-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 transition-colors duration-500 px-2 md:px-8 py-12">
+      <div className="w-full max-w-4xl md:max-w-5xl lg:max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[70vh]">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="w-full bg-white/90 dark:bg-neutral-950/90 rounded-2xl shadow-xl p-8 md:p-16 flex flex-col items-center"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-purple-700 dark:text-purple-300 leading-tight mb-4 font-sans text-center">
+            {memory.title}
+          </h1>
+          <p className="text-base md:text-lg text-neutral-500 dark:text-neutral-400 mb-8 font-mono text-center">
+            {new Date(memory.date).toLocaleDateString('en-US', {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+          <div className="text-[1.25rem] md:text-[1.35rem] lg:text-[1.5rem] text-neutral-800 dark:text-neutral-100 leading-relaxed font-serif whitespace-pre-line max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto text-left" style={{ letterSpacing: '0.01em' }}>
+            {memory.excerpt}
           </div>
-        </div>
+        </motion.div>
       </div>
+      {/* Toggle Button (Optional) */}
+      <button
+        onClick={toggleDark}
+        className="fixed top-4 right-4 px-3 py-1.5 text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-xl shadow hover:scale-105 transition-all"
+      >
+        Toggle {dark ? "Light" : "Dark"} Mode
+      </button>
     </main>
   );
 }
