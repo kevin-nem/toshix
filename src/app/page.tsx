@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 // You can keep your Google Fonts import for 'Inter' and 'Playfair Display' in globals.css.
 
-const memory = {
+const memoryEN = {
   title: "The Distance Between Two Seats",
   subtitle: "✈️ Memory Note — End of August 2022",
   date: "2022-08-31",
@@ -13,13 +13,13 @@ const memory = {
     "I was finishing my trip in Japan, where I had stayed for nearly a month. The days were filled with catching up with friends, reconnecting with old acquaintances, going on road trips, and visiting family. It was a trip rich in emotion and nostalgia — a bittersweet reminder of how deeply rooted my life had been in Asia.",
     "I was now heading back to Singapore for a short time — just enough to pack up my things before returning to France. My time in Asia was drawing to a close, and I felt it in every step.",
     "Before boarding my flight from Tokyo to Singapore, I paid extra to change my seat to an aisle — a small comfort for a long journey. That simple choice, almost trivial at the time, ended up making this whole story happen.",
-    "Once seated, I find myself next to a woman who immediately engages in conversation. She’s American, living in Phoenix, Arizona, and flying to Cambodia to reunite with an old friend — a former footballer. That small detail makes her journey sound like it belongs in a novel.",
-    "As we begin talking, the conversation unfolds effortlessly. We spend nearly six hours sharing our stories, drinking Japanese sake, and opening up as if we’d known each other for years.",
+    "Once seated, I find myself next to a woman who immediately engages in conversation. She's American, living in Phoenix, Arizona, and flying to Cambodia to reunite with an old friend — a former footballer. That small detail makes her journey sound like it belongs in a novel.",
+    "As we begin talking, the conversation unfolds effortlessly. We spend nearly six hours sharing our stories, drinking Japanese sake, and opening up as if we'd known each other for years.",
     "One of the more emotional moments comes when she tells me about her ex-boyfriend — the man she once believed would become her husband. She shares how she later discovered that he was a drug addict, and possibly involved in criminal activities. This revelation shattered both the relationship and a part of her.",
-    "She shows me pictures of them together — images from a time when everything seemed happy, at least on the surface. There’s regret in her voice, not only for the loss of those memories, but for not being able to see the signs sooner. Her vulnerability is raw, and I feel honored that she’s sharing such an intimate part of her life with a stranger on a plane.",
-    "As we land in Singapore, rain is falling softly outside the plane windows. She mentions she’ll probably just sleep at the airport or wander the city until her flight to Cambodia in the morning. Without thinking too much, I offer her a place to stay — a friend’s apartment I was borrowing, since I had no apartment of my own at the time. To my surprise, she accepts instantly.",
-    "“Are you sure?” I ask, hesitating. “We’ve only known each other for a few hours.”",
-    "She smiles. “We’ve talked about so much. I feel like I already know you.”",
+    "She shows me pictures of them together — images from a time when everything seemed happy, at least on the surface. There's regret in her voice, not only for the loss of those memories, but for not being able to see the signs sooner. Her vulnerability is raw, and I feel honored that she's sharing such an intimate part of her life with a stranger on a plane.",
+    "As we land in Singapore, rain is falling softly outside the plane windows. She mentions she'll probably just sleep at the airport or wander the city until her flight to Cambodia in the morning. Without thinking too much, I offer her a place to stay — a friend's apartment I was borrowing, since I had no apartment of my own at the time. To my surprise, she accepts instantly.",
+    "“Are you sure?” I ask, hesitating. “We've only known each other for a few hours.”",
+    "She smiles. “We've talked about so much. I feel like I already know you.”",
     "After passing customs and picking up the keys from another friend, we finally arrive at the apartment. Nothing remarkable happens — I just feel quietly happy I could help someone. She settles in on the sofa while I take the bed. We prepare to sleep, and I turn off the lights.",
     "“Good night,” I say softly.",
     "A few minutes pass. Then her voice breaks the silence:",
@@ -27,7 +27,6 @@ const memory = {
     "I glance at my phone, assuming the brightness was disturbing her. I quickly apologize and dim the screen.",
     "But then she asks again. And again.",
     "The third time, she pauses — and then asks quietly:",
-    // Only this line bold!
     "“Do you want to cuddle?”",
     "I freeze for a second. My mind fills with questions.",
     "Cuddle… does she mean just that? Or is there something more behind those words? Is this about comfort? Intimacy? Desire? Or simply not wanting to be alone?",
@@ -35,15 +34,38 @@ const memory = {
   ]
 };
 
-export default function Home() {
-  const [dark, setDark] = useState(false);
+const memoryFR = {
+  title: "La Distance Entre Deux Sièges",
+  subtitle: "✈️ Souvenir — Fin Août 2022",
+  date: "2022-08-31",
+  paragraphs: [
+    "Je terminais mon voyage au Japon, où j'avais passé près d'un mois. Les journées étaient remplies de retrouvailles avec des amis, de reconnections avec de vieilles connaissances, de road trips, et de moments passés en famille. C'était un voyage chargé d'émotion et de nostalgie — un rappel doux-amer de combien ma vie en Asie avait été profonde et marquante.",
+    "Je rentrais à Singapour pour quelques jours — juste assez de temps pour faire mes valises avant de retourner en France. Ma vie en Asie touchait à sa fin, et je le sentais à chaque instant.",
+    "Avant d'embarquer pour mon vol Tokyo–Singapour, j'ai payé un supplément pour changer de siège et en prendre un côté allée — un petit confort pour un long trajet. Ce choix simple, presque anodin sur le moment, a pourtant tout déclenché.",
+    "Une fois installé, je me retrouve à côté d'une femme qui engage immédiatement la conversation. Elle est américaine, vit à Phoenix, en Arizona, et se rend au Cambodge pour retrouver un vieil ami — un ancien footballeur. Ce petit détail donne à son voyage une allure de roman.",
+    "Très vite, la discussion devient fluide et naturelle. Nous passons presque six heures à parler de nos vies, de nos difficultés, de tout et de rien, tout en buvant du saké japonais comme si nous étions dans un bar. On s'ouvre l'un à l'autre avec une étonnante facilité, comme si on se connaissait depuis des années.",
+    "L'un des moments les plus forts survient lorsqu'elle me parle de son ex — l'homme qu'elle pensait un jour épouser. Elle a découvert plus tard qu'il était accro à la drogue, et probablement impliqué dans des activités criminelles. Cette révélation a brisé leur couple… et une partie d'elle avec.",
+    "Elle me montre des photos d'eux à l'époque — des images qui, en apparence, respirent le bonheur. Elle parle avec regret, non seulement de la perte de ces souvenirs, mais aussi du fait qu'elle n'ait pas su voir les signes plus tôt. Elle est vulnérable, sincère, et je me sens honoré qu'elle partage cette partie d'elle avec moi — un parfait inconnu.",
+    "À l'atterrissage à Singapour, la pluie tombe doucement sur le tarmac. Elle me dit qu'elle dormira probablement à l'aéroport ou errera dans la ville jusqu'à son prochain vol pour le Cambodge, prévu le lendemain matin. Spontanément, je lui propose de venir dormir chez moi — enfin, dans l'appartement d'un ami que j'occupais temporairement, car je n'avais plus de logement à ce moment-là. À ma grande surprise, elle accepte sans hésiter.",
+    "— Tu es sûre ? je lui demande. On ne se connaît que depuis quelques heures.",
+    "Elle me sourit : — Oui, mais on a tellement parlé… j'ai l'impression de te connaître.",
+    "Après être passés par les douanes et avoir récupéré les clés auprès d'un autre ami, nous arrivons finalement à l'appartement. Rien de spécial ne se passe — je suis simplement heureux d'avoir pu aider quelqu'un. Elle s'installe sur le canapé, moi sur le lit. On se prépare à dormir, et j'éteins la lumière.",
+    "— Bonne nuit, je lui dis doucement.",
+    "Quelques minutes plus tard, sa voix brise le silence :",
+    "— Tu dors ?",
+    "Je regarde mon téléphone, pensant que la lumière la dérange. Je m'excuse rapidement et baisse la luminosité.",
+    "Mais elle repose la question. Une fois. Deux fois.",
+    "La troisième fois, elle marque une pause… puis demande à voix basse :",
+    "— Tu veux faire un câlin ?",
+    "Je me fige. Et mille questions me traversent l'esprit.",
+    "Câlin… juste un câlin ? Ou y a-t-il autre chose derrière ? Est-ce du réconfort ? De l'intimité ? Du désir ? Ou simplement l'envie de ne pas être seule ?",
+    "Je tourne la question dans tous les sens, en quelques secondes. Tant de choses s'étaient passées en si peu de temps — une connexion inattendue, profonde, entre deux inconnus. Et maintenant, suspendus dans le calme d'une nuit pluvieuse à Singapour, elle me proposait de réduire encore un peu plus la distance entre nous.",
+  ]
+};
 
-  const toggleDark = () => {
-    if (typeof window !== "undefined") {
-      document.documentElement.classList.toggle("dark", !dark);
-    }
-    setDark(!dark);
-  };
+export default function Home() {
+  const [lang, setLang] = useState<'en' | 'fr'>("en");
+  const memory = lang === 'en' ? memoryEN : memoryFR;
 
   return (
     <main
@@ -75,7 +97,7 @@ export default function Home() {
           className="flex-1 prose prose-lg dark:prose-invert max-w-none font-serif text-justify space-y-8"
           style={{
             fontSize: "1.21rem",
-            color: dark ? "#E5E5E5" : "#2D2D2D",
+            color: "#2D2D2D",
             fontFeatureSettings: "'liga' 1, 'kern' 1",
             lineHeight: "2.10rem",
             letterSpacing: "0.009em",
@@ -84,7 +106,12 @@ export default function Home() {
           {memory.paragraphs.map((para, i) => (
             <p
               key={i}
-              className={para === "“Do you want to cuddle?”" ? "font-semibold" : ""}
+              className={
+                (lang === 'en' && para === "“Do you want to cuddle?”") ||
+                (lang === 'fr' && para.trim() === "— Tu veux faire un câlin ?")
+                  ? "font-semibold"
+                  : ""
+              }
               style={{
                 textAlign: "justify",
                 textJustify: "inter-word",
@@ -97,15 +124,13 @@ export default function Home() {
         </article>
       </motion.div>
 
-      {/* Dark mode toggle */}
+      {/* Language toggle button */}
       <button
-        onClick={toggleDark}
-        className="fixed top-5 right-5 text-xs px-3 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition z-50"
-        style={{
-          fontFamily: "Inter, sans-serif",
-        }}
+        onClick={() => setLang(lang === 'en' ? 'fr' : 'en')}
+        className="fixed top-5 right-5 text-xs px-3 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition z-50 font-sans"
+        aria-label="Toggle language"
       >
-        Toggle {dark ? "Light" : "Dark"} Mode
+        {lang === 'en' ? 'FR' : 'EN'}
       </button>
     </main>
   );
