@@ -114,13 +114,9 @@ export default function Home() {
 
   return (
     <main
-      className={`min-h-screen w-full transition-colors duration-300 relative overflow-x-hidden bg-gradient-to-br from-[#f8f6f4] via-[#f9fafb] to-[#ece7de]${dark ? ' dark:bg-[#18171b] dark:bg-none' : ''}`}
+      className="min-h-screen w-full transition-colors duration-300 relative overflow-x-hidden bg-[#f8f6f4]"
       style={{ fontFamily: "Inter, sans-serif" }}
     >
-      {/* Top/bottom gradients always visible */}
-      <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#e5e0d6]/90 to-transparent pointer-events-none z-10" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#e7e3d8]/90 to-transparent pointer-events-none z-10" />
-
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
