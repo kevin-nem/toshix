@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const memoryEN = {
@@ -75,6 +75,15 @@ const memoryFR = {
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'fr'>("en");
+  const [dark, setDark] = useState(false);
+
+  // Sync dark mode with document
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.documentElement.classList.toggle("dark", dark);
+    }
+  }, [dark]);
+
   const memory = lang === 'en' ? memoryEN : memoryFR;
 
   return (
@@ -176,14 +185,29 @@ export default function Home() {
         </article>
       </motion.div>
 
-      {/* Language toggle button */}
-      <button
-        onClick={() => setLang(lang === 'en' ? 'fr' : 'en')}
-        className="fixed top-5 right-5 text-xs px-3 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition z-50 font-sans"
-        aria-label="Toggle language"
-      >
-        {lang === 'en' ? 'FR' : 'EN'}
-      </button>
+      {/* Top right controls */}
+      <div className="fixed top-5 right-5 flex gap-2 z-50">
+        <button
+          onClick={() => setLang(lang === 'en' ? 'fr' : 'en')}
+          className="text-xs px-3 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition font-sans border border-neutral-300 dark:border-neutral-700"
+          aria-label="Toggle language"
+        >
+          {lang === 'en' ? 'Français' : 'English'}
+        </button>
+        <button
+          onClick={() => setDark(d => !d)}
+          className="text-xs px-2 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition font-sans border border-neutral-300 dark:border-neutral-700 flex items-center justify-center"
+          aria-label="Toggle dark mode"
+        >
+          {dark ? (
+            // Sun icon
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="5" strokeWidth="1.5"/><path strokeWidth="1.5" d="M12 1v2m0 18v2m11-11h-2M3 12H1m16.95 7.07l-1.41-1.41M6.34 6.34L4.93 4.93m12.02 0l-1.41 1.41M6.34 17.66l-1.41 1.41"/></svg>
+          ) : (
+            // Moon icon
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeWidth="1.5" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
+          )}
+        </button>
+      </div>
     </main>
   );
 }
