@@ -114,7 +114,7 @@ export default function Home() {
 
   return (
     <main
-      className="min-h-screen w-full transition-colors duration-300 relative overflow-x-hidden bg-[#f8f6f4]"
+      className="min-h-screen w-full transition-colors duration-300 relative overflow-x-hidden bg-[#ede6da]"
       style={{ fontFamily: "Inter, sans-serif" }}
     >
       <motion.div
@@ -125,7 +125,7 @@ export default function Home() {
         style={{ position: "relative", zIndex: 20 }}
       >
         <h1
-          className="serif text-[2.2rem] md:text-[2.8rem] lg:text-[3.4rem] font-normal leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50 mb-3"
+          className="serif text-[2.2rem] md:text-[2.8rem] lg:text-[3.4rem] font-normal leading-[1.08] tracking-tight text-neutral-900 mb-3"
           style={{
             fontWeight: 400,
             letterSpacing: "-0.03em",
