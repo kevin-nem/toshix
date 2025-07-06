@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const memory = {
-  title: "✈️ Memory Note — End of August 2022",
+  title: "Memory Note — End of August 2022",
   date: "2022-08-31",
-  excerpt: `As I leave Tokyo, I hop into a taxi to meet my friend Yuko for lunch. We catch up, and to my surprise, I discover she's using Kpler — the very company I work for. It's a fun and unexpected connection that makes me smile. Time flies, and soon I'm rushing to catch my flight at Haneda Airport.
+  content: `As I leave Tokyo, I hop into a taxi to meet my friend Yuko for lunch. We catch up, and to my surprise, I discover she's using Kpler — the very company I work for. It's a fun and unexpected connection that makes me smile. Time flies, and soon I'm rushing to catch my flight at Haneda Airport.
 
 Before boarding, I pay extra to change my seat to an aisle — a small comfort for a long trip. The flight is from Tokyo to Singapore.
 
@@ -45,6 +46,7 @@ I froze for a second. My mind filled with questions.
 Cuddle… does she mean just that? Or is there something more behind those words? Is this about comfort? Intimacy? Desire? Or simply not wanting to be alone?
 
 I turned the question over and over in my head in a matter of seconds. So much had happened in the last few hours — a deep, unexpected connection that somehow brought two strangers close in a way neither could have predicted. And now, suspended in the quiet of a rainy Singapore night, she was asking to close that distance even more.`,
+  image: "/memory-flight.jpg",
 };
 
 export default function Home() {
@@ -58,33 +60,54 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-purple-50 to-yellow-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 transition-colors duration-500 px-2 md:px-8 py-12">
-      <div className="w-full max-w-4xl md:max-w-5xl lg:max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[70vh]">
+    <main className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 transition-colors duration-300 px-4 md:px-8 py-12">
+      <div className="max-w-4xl mx-auto space-y-12">
+        {/* Header & Image */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full bg-white/90 dark:bg-neutral-950/90 rounded-2xl shadow-xl p-8 md:p-16 flex flex-col items-center"
+          className="space-y-6"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-purple-700 dark:text-purple-300 leading-tight mb-4 font-sans text-center">
+          <h1 className="text-3xl md:text-4xl font-light leading-tight tracking-tight text-center">
             {memory.title}
           </h1>
-          <p className="text-base md:text-lg text-neutral-500 dark:text-neutral-400 mb-8 font-mono text-center">
-            {new Date(memory.date).toLocaleDateString('en-US', {
+          <p className="text-sm text-center text-neutral-500 dark:text-neutral-400 font-light">
+            {new Date(memory.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}
           </p>
-          <div className="text-[1.25rem] md:text-[1.35rem] lg:text-[1.5rem] text-neutral-800 dark:text-neutral-100 leading-relaxed font-serif whitespace-pre-line max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto text-left" style={{ letterSpacing: '0.01em' }}>
-            {memory.excerpt}
+          <div className="relative w-full h-[400px] rounded-xl overflow-hidden shadow border border-neutral-200 dark:border-neutral-700">
+            <Image
+              src={memory.image}
+              alt="Memory flight"
+              fill
+              className="object-cover object-center"
+              priority
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml,%3Csvg width='400' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23e5e7eb' width='400' height='500'/%3E%3C/svg%3E"
+            />
+          </div>
+        </motion.div>
+
+        {/* Full Story Content */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <div className="text-base md:text-lg leading-relaxed font-light whitespace-pre-line text-neutral-700 dark:text-neutral-300">
+            {memory.content}
           </div>
         </motion.div>
       </div>
-      {/* Toggle Button (Optional) */}
+
+      {/* Dark mode toggle */}
       <button
         onClick={toggleDark}
-        className="fixed top-4 right-4 px-3 py-1.5 text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-xl shadow hover:scale-105 transition-all"
+        className="fixed top-5 right-5 text-xs px-3 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition"
       >
         Toggle {dark ? "Light" : "Dark"} Mode
       </button>
