@@ -34,7 +34,7 @@ const memoryEN = {
     "That day, a lot of threads were crossing: the end of a long journey in Japan, the idea of leaving Asia behind, the return to France ahead. I was in between worlds.",
     "And it was exactly there, in that in-between space, that the conversation happened.",
     "Talking about our lives for hours, without filters, with a complete stranger sitting next to me… it was unexpected, deep, and incredibly human. There was an instant trust, as if time itself had paused to offer us a brief parenthesis — right there, between two seats on a plane.",
-    "Maybe it was just a moment. But sometimes, that's more than enough."
+    "Maybe it was just a moment, but it stayed with me in a quiet, lasting way. Sometimes, memories like that linger without asking."
   ]
 };
 
@@ -69,7 +69,7 @@ const memoryFR = {
     "Ce jour-là, beaucoup de choses se croisaient : la fin d'un long voyage au Japon, la perspective de quitter l'Asie, mon retour prochain en France. J'étais entre deux mondes.",
     "Et c'est précisément là, dans cet entre-deux, que cette conversation a eu lieu.",
     "Parler de nos vies pendant des heures, sans filtre, avec une inconnue assise à côté de moi… c'était inattendu, profond, et incroyablement humain. Il y a eu une sorte de confiance immédiate, comme si le temps avait décidé de nous accorder une parenthèse — juste là, entre deux sièges d'avion.",
-    "Ce n'était peut-être qu'un moment. Mais parfois, c'est largement suffisant."
+    "Ce n’était peut-être qu’un moment, mais il m’a touché d’une façon que je n’oublierai pas. Parfois, ce genre de souvenir s’installe sans bruit, et reste."
   ]
 };
 
