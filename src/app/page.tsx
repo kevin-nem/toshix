@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-// You can keep your Google Fonts import for 'Inter' and 'Playfair Display' in globals.css.
-
 const memoryEN = {
   title: "The Distance Between Two Seats",
   subtitle: "✈️ Memory Note — End of August 2022",
@@ -31,6 +29,12 @@ const memoryEN = {
     "I freeze for a second. My mind fills with questions.",
     "Cuddle… does she mean just that? Or is there something more behind those words? Is this about comfort? Intimacy? Desire? Or simply not wanting to be alone?",
     "I turn the question over and over in my head in a matter of seconds. So much had happened in the last few hours — a deep, unexpected connection that somehow brought two strangers close in a way neither could have predicted. And now, suspended in the quiet of a rainy Singapore night, she was asking to close that distance even more.",
+    "Chance, choice, and the connections that leave a mark",
+    "I often think back to that almost meaningless moment when I paid extra to change my seat. Just a small choice, made without much thought. And yet, that one gesture made the entire story possible.",
+    "That day, a lot of threads were crossing: the end of a long journey in Japan, the idea of leaving Asia behind, the return to France ahead. I was in between worlds.",
+    "And it was exactly there, in that in-between space, that the conversation happened.",
+    "Talking about our lives for hours, without filters, with a complete stranger sitting next to me… it was unexpected, deep, and incredibly human. There was an instant trust, as if time itself had paused to offer us a brief parenthesis — right there, between two seats on a plane.",
+    "Maybe it was just a moment. But sometimes, that's more than enough."
   ]
 };
 
@@ -60,6 +64,12 @@ const memoryFR = {
     "Je me fige. Et mille questions me traversent l'esprit.",
     "Câlin… juste un câlin ? Ou y a-t-il autre chose derrière ? Est-ce du réconfort ? De l'intimité ? Du désir ? Ou simplement l'envie de ne pas être seule ?",
     "Je tourne la question dans tous les sens, en quelques secondes. Tant de choses s'étaient passées en si peu de temps — une connexion inattendue, profonde, entre deux inconnus. Et maintenant, suspendus dans le calme d'une nuit pluvieuse à Singapour, elle me proposait de réduire encore un peu plus la distance entre nous.",
+    "Le hasard, les choix, et les rencontres qui marquent",
+    "Je repense souvent à ce moment presque insignifiant où j'ai payé un supplément pour changer de siège. Juste un petit choix, pris sans réfléchir. Et pourtant, c'est ce geste qui a rendu cette rencontre possible.",
+    "Ce jour-là, beaucoup de choses se croisaient : la fin d'un long voyage au Japon, la perspective de quitter l'Asie, mon retour prochain en France. J'étais entre deux mondes.",
+    "Et c'est précisément là, dans cet entre-deux, que cette conversation a eu lieu.",
+    "Parler de nos vies pendant des heures, sans filtre, avec une inconnue assise à côté de moi… c'était inattendu, profond, et incroyablement humain. Il y a eu une sorte de confiance immédiate, comme si le temps avait décidé de nous accorder une parenthèse — juste là, entre deux sièges d'avion.",
+    "Ce n'était peut-être qu'un moment. Mais parfois, c'est largement suffisant."
   ]
 };
 
@@ -103,24 +113,66 @@ export default function Home() {
             letterSpacing: "0.009em",
           }}
         >
-          {memory.paragraphs.map((para, i) => (
-            <p
-              key={i}
-              className={
-                (lang === 'en' && para === "“Do you want to cuddle?”") ||
-                (lang === 'fr' && para.trim() === "— Tu veux faire un câlin ?")
-                  ? "font-semibold"
-                  : ""
-              }
-              style={{
-                textAlign: "justify",
-                textJustify: "inter-word",
-                marginBottom: i === memory.paragraphs.length - 1 ? 0 : "2.1rem",
-              }}
-            >
-              {para}
-            </p>
-          ))}
+          {memory.paragraphs.map((para, i) => {
+            // Find the epilogue start index
+            const isEpilogue =
+              (lang === 'en' && para.startsWith('Chance, choice, and the connections that leave a mark')) ||
+              (lang === 'fr' && para.startsWith('Le hasard, les choix, et les rencontres qui marquent'));
+            // Render the epilogue section with a divider and heading
+            if (isEpilogue) {
+              return (
+                <>
+                  <hr
+                    key="epilogue-divider"
+                    className="my-10 border-t border-neutral-300 dark:border-neutral-700 opacity-60 w-2/3 mx-auto" />
+                  <h2
+                    key="epilogue-heading"
+                    className="serif text-xl md:text-2xl font-semibold text-center text-neutral-700 dark:text-neutral-200 mb-6 mt-2 tracking-tight"
+                  >
+                    {para.replace('✨ ', '')}
+                  </h2>
+                </>
+              );
+            }
+            // Render epilogue paragraphs after the heading in a lighter, italic style
+            const epilogueStart = memory.paragraphs.findIndex(p =>
+              (lang === 'en' && p.startsWith('Epilogue')) ||
+              (lang === 'fr' && p.startsWith('Épilogue'))
+            );
+            if (epilogueStart !== -1 && i > epilogueStart) {
+              return (
+                <p
+                  key={i}
+                  className="italic text-neutral-500 dark:text-neutral-400 text-center"
+                  style={{
+                    fontSize: '1.08rem',
+                    marginBottom: i === memory.paragraphs.length - 1 ? 0 : '1.5rem',
+                  }}
+                >
+                  {para}
+                </p>
+              );
+            }
+            // Main story paragraphs
+            return (
+              <p
+                key={i}
+                className={
+                  (lang === 'en' && para === "“Do you want to cuddle?”") ||
+                  (lang === 'fr' && para.trim() === "— Tu veux faire un câlin ?")
+                    ? "font-semibold"
+                    : ""
+                }
+                style={{
+                  textAlign: "justify",
+                  textJustify: "inter-word",
+                  marginBottom: i === memory.paragraphs.length - 1 ? 0 : "2.1rem",
+                }}
+              >
+                {para}
+              </p>
+            );
+          })}
         </article>
       </motion.div>
 
