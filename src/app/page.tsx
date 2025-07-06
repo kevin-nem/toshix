@@ -69,7 +69,7 @@ const memoryFR = {
     "Ce jour-là, beaucoup de choses se croisaient : la fin d'un long voyage au Japon, la perspective de quitter l'Asie, mon retour prochain en France. J'étais entre deux mondes.",
     "Et c'est précisément là, dans cet entre-deux, que cette conversation a eu lieu.",
     "Parler de nos vies pendant des heures, sans filtre, avec une inconnue assise à côté de moi… c'était inattendu, profond, et incroyablement humain. Il y a eu une sorte de confiance immédiate, comme si le temps avait décidé de nous accorder une parenthèse — juste là, entre deux sièges d'avion.",
-    "Ce n’était peut-être qu’un moment, mais il m’a touché d’une façon que je n’oublierai pas. Parfois, ce genre de souvenir s’installe sans bruit, et reste."
+    "Ce n'était peut-être qu'un moment, mais il m'a touché d'une façon que je n'oublierai pas. Parfois, ce genre de souvenir s'installe sans bruit, et reste."
   ]
 };
 
@@ -158,7 +158,7 @@ export default function Home() {
                     className="my-10 border-t border-neutral-300 dark:border-neutral-700 opacity-60 w-2/3 mx-auto" />
                   <h2
                     key="epilogue-heading"
-                    className="serif text-xl md:text-2xl font-semibold text-center text-neutral-700 dark:text-neutral-200 mb-6 mt-2 tracking-tight"
+                    className="serif text-xl md:text-2xl font-semibold text-center text-neutral-700 mb-6 mt-2 tracking-tight"
                   >
                     {para.replace('✨ ', '')}
                   </h2>
