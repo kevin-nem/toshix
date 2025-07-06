@@ -1,51 +1,19 @@
-import type { Metadata } from "next";
-import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/Navigation";
+import { Inter } from "next/font/google";
+import type { Metadata } from "next";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-});
-
-const robotoMono = Roboto_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "My Personal Space - Thoughts, Photos & Memories",
-  description: "A personal corner of the internet where I share my thoughts, capture memories, and showcase moments that matter.",
-  keywords: ["blog", "personal", "thoughts", "photos", "memories", "portfolio"],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
-  publisher: "Your Name",
-  openGraph: {
-    title: "My Personal Space",
-    description: "A personal corner of the internet where I share my thoughts, capture memories, and showcase moments that matter.",
-    type: "website",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "My Personal Space",
-    description: "A personal corner of the internet where I share my thoughts, capture memories, and showcase moments that matter.",
-  },
+  title: "Kevin Ryoma – Blog",
+  description: "A modern, elegant, and playful personal blog.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${robotoMono.variable} antialiased`}
-      >
-        <Navigation />
-        {children}
-      </body>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body className={`${inter.variable} bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 transition-colors duration-300 min-h-screen`}>{children}</body>
     </html>
   );
 }
