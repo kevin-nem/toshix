@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const memory = {
   title: "Memory Note — End of August 2022",
@@ -46,7 +45,6 @@ I froze for a second. My mind filled with questions.
 Cuddle… does she mean just that? Or is there something more behind those words? Is this about comfort? Intimacy? Desire? Or simply not wanting to be alone?
 
 I turned the question over and over in my head in a matter of seconds. So much had happened in the last few hours — a deep, unexpected connection that somehow brought two strangers close in a way neither could have predicted. And now, suspended in the quiet of a rainy Singapore night, she was asking to close that distance even more.`,
-  image: "/memory-flight.jpg",
 };
 
 export default function Home() {
@@ -59,50 +57,46 @@ export default function Home() {
     setDark(!dark);
   };
 
-  return (
-    <main className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 transition-colors duration-300 px-4 md:px-8 py-12">
-      <div className="max-w-4xl mx-auto space-y-12">
-        {/* Header & Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-6"
-        >
-          <h1 className="text-3xl md:text-4xl font-light leading-tight tracking-tight text-center">
-            {memory.title}
-          </h1>
-          <p className="text-sm text-center text-neutral-500 dark:text-neutral-400 font-light">
-            {new Date(memory.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-          <div className="relative w-full h-[400px] rounded-xl overflow-hidden shadow border border-neutral-200 dark:border-neutral-700">
-            <Image
-              src={memory.image}
-              alt="Memory flight"
-              fill
-              className="object-cover object-center"
-              priority
-              placeholder="blur"
-              blurDataURL="data:image/svg+xml,%3Csvg width='400' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23e5e7eb' width='400' height='500'/%3E%3C/svg%3E"
-            />
-          </div>
-        </motion.div>
+  // Split paragraphs for more immersive display
+  const paragraphs = memory.content.split("\n\n");
 
-        {/* Full Story Content */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          <div className="text-base md:text-lg leading-relaxed font-light whitespace-pre-line text-neutral-700 dark:text-neutral-300">
-            {memory.content}
-          </div>
-        </motion.div>
-      </div>
+  return (
+    <main className="min-h-screen min-w-screen flex items-center justify-center bg-gradient-to-br from-[#f6f3f0] via-[#f1f7fa] to-[#e6e9f5] dark:from-neutral-900 dark:via-neutral-950 dark:to-neutral-900 transition-colors duration-300 px-2 py-10">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="w-full max-w-2xl mx-auto bg-white/90 dark:bg-neutral-950/90 rounded-2xl shadow-2xl px-8 py-12 flex flex-col items-center"
+        style={{
+          boxShadow: "0 8px 48px 0 rgba(70, 80, 130, 0.10)",
+        }}
+      >
+        <h1 className="text-2xl md:text-3xl font-serif font-normal text-neutral-800 dark:text-neutral-100 mb-2 text-center tracking-tight">
+          {memory.title}
+        </h1>
+        <p className="text-xs text-neutral-400 mb-8 text-center font-sans">
+          {new Date(memory.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+        <div className="prose prose-lg dark:prose-invert font-serif max-w-none text-center">
+          {paragraphs.map((para, i) => (
+            <p
+              key={i}
+              className="mb-6 leading-relaxed text-neutral-700 dark:text-neutral-200"
+              style={{
+                textAlign: i % 3 === 0 ? "center" : "justify", // alternate between center/justify for literary feel
+                fontSize: "1.15rem",
+                letterSpacing: "0.01em",
+              }}
+            >
+              {para}
+            </p>
+          ))}
+        </div>
+      </motion.div>
 
       {/* Dark mode toggle */}
       <button
