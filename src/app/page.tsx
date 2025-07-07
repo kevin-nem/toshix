@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import React from "react";
+
+const NOISE_SVG = `url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noiseFilter)"/></svg>')`;
 
 const memoryEN = {
   title: "The Distance Between Two Seats",
@@ -107,129 +110,64 @@ function useDarkMode() {
 }
 
 export default function Home() {
-  const [lang, setLang] = useState<'en' | 'fr'>("en");
-  const [dark, toggleDark] = useDarkMode();
-
-  const memory = lang === 'en' ? memoryEN : memoryFR;
+  // For now, just one note. In the future, this could be an array.
+  const notes = [
+    {
+      slug: "the-distance-between-two-seats",
+      title: memoryEN.title,
+      date: memoryEN.date,
+      excerpt: memoryEN.paragraphs[0],
+    },
+    {
+      slug: "still-becoming",
+      title: "Still Becoming",
+      date: "2024-06-07",
+      excerpt: "I’ve never really known what I want to become. Not in the way some people do — those who seem born with a calling, or who grow into one with clarity and conviction. For me, life has always felt more like wandering than following a path. Not aimless, but open. Full of questions I haven’t quite answered yet.",
+    },
+  ];
 
   return (
     <main
-      className="min-h-screen w-full transition-colors duration-300 relative overflow-x-hidden bg-[#ede6da]"
-      style={{ fontFamily: "Inter, sans-serif" }}
+      className="min-h-screen w-full flex flex-col items-center justify-center relative"
+      style={{
+        fontFamily: "Inter, sans-serif",
+        background: "#f7fafd",
+        backgroundImage: NOISE_SVG,
+        backgroundBlendMode: "overlay",
+      }}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: [0.33, 1, 0.68, 1] }}
-        className="max-w-5xl xl:max-w-6xl 2xl:max-w-screen-lg mx-auto px-6 sm:px-16 pt-28 pb-24 flex flex-col"
-        style={{ position: "relative", zIndex: 20 }}
-      >
-        <h1
-          className="serif text-[2.2rem] md:text-[2.8rem] lg:text-[3.4rem] font-normal leading-[1.08] tracking-tight text-neutral-900 mb-3"
-          style={{
-            fontWeight: 400,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          {memory.title}
-        </h1>
-        <div className="text-base text-neutral-500 mb-14 font-sans tracking-wide">{memory.subtitle}</div>
-        <article
-          className="flex-1 prose prose-lg dark:prose-invert max-w-none font-serif text-justify space-y-8"
-          style={{
-            fontSize: "1.21rem",
-            color: "#2D2D2D",
-            fontFeatureSettings: "'liga' 1, 'kern' 1",
-            lineHeight: "2.10rem",
-            letterSpacing: "0.009em",
-          }}
-        >
-          {memory.paragraphs.map((para, i) => {
-            // Find the epilogue start index
-            const isEpilogue =
-              (lang === 'en' && para.startsWith('Chance, choice, and the connections that leave a mark')) ||
-              (lang === 'fr' && para.startsWith('Le hasard, les choix, et les rencontres qui marquent'));
-            // Render the epilogue section with a divider and heading
-            if (isEpilogue) {
-              return (
-                <>
-                  <hr
-                    key="epilogue-divider"
-                    className="my-10 border-t border-neutral-300 dark:border-neutral-700 opacity-60 w-2/3 mx-auto" />
-                  <h2
-                    key="epilogue-heading"
-                    className="serif text-xl md:text-2xl font-semibold text-center text-neutral-700 mb-6 mt-2 tracking-tight"
-                  >
-                    {para.replace('✨ ', '')}
-                  </h2>
-                </>
-              );
-            }
-            // Render epilogue paragraphs after the heading in a lighter, italic style
-            const epilogueStart = memory.paragraphs.findIndex(p =>
-              (lang === 'en' && p.startsWith('Epilogue')) ||
-              (lang === 'fr' && p.startsWith('Épilogue'))
-            );
-            if (epilogueStart !== -1 && i > epilogueStart) {
-              return (
-                <p
-                  key={i}
-                  className="italic text-neutral-500 dark:text-neutral-400 text-center"
-                  style={{
-                    fontSize: '1.08rem',
-                    marginBottom: i === memory.paragraphs.length - 1 ? 0 : '1.5rem',
-                  }}
-                >
-                  {para}
-                </p>
-              );
-            }
-            // Main story paragraphs
-            return (
-              <p
-                key={i}
-                className={
-                  (lang === 'en' && para === "“Do you want to cuddle?”") ||
-                  (lang === 'fr' && para.trim() === "— Tu veux faire un câlin ?")
-                    ? "font-semibold"
-                    : ""
-                }
-                style={{
-                  textAlign: "justify",
-                  textJustify: "inter-word",
-                  marginBottom: i === memory.paragraphs.length - 1 ? 0 : "2.1rem",
-                }}
-              >
-                {para}
-              </p>
-            );
-          })}
-        </article>
-      </motion.div>
-
-      {/* Top right controls */}
-      <div className="fixed top-5 right-5 flex gap-2 z-50">
-        <button
-          onClick={() => setLang(lang === 'en' ? 'fr' : 'en')}
-          className="text-xs px-3 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition font-sans border border-neutral-300 dark:border-neutral-700"
-          aria-label="Toggle language"
-        >
-          {lang === 'en' ? 'Français' : 'English'}
-        </button>
-        <button
-          onClick={toggleDark}
-          className="text-xs px-2 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition font-sans border border-neutral-300 dark:border-neutral-700 flex items-center justify-center"
-          aria-label="Toggle dark mode"
-        >
-          {dark ? (
-            // Sun icon
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="5" strokeWidth="1.5"/><path strokeWidth="1.5" d="M12 1v2m0 18v2m11-11h-2M3 12H1m16.95 7.07l-1.41-1.41M6.34 6.34L4.93 4.93m12.02 0l-1.41 1.41M6.34 17.66l-1.41 1.41"/></svg>
-          ) : (
-            // Moon icon
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeWidth="1.5" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
-          )}
-        </button>
+      <div className="fixed top-5 right-5 flex gap-2 z-50"></div>
+      <div className="w-full max-w-6xl mx-auto pt-32 pb-24 px-4">
+        <h1 className="serif text-4xl md:text-5xl font-normal text-left text-neutral-900 mb-16 tracking-tight">Notes</h1>
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 justify-center items-stretch">
+          {notes.map((note, idx) => (
+            <a
+              key={note.slug}
+              href={`/memories/${note.slug}`}
+              className="group flex-1 min-w-[260px] max-w-xl rounded-2xl shadow-lg border border-neutral-200 hover:border-neutral-400 transition bg-white hover:bg-neutral-50 p-8 flex flex-col justify-between relative overflow-hidden"
+              style={{
+                borderLeft: `10px solid ${idx === 0 ? '#f5e7c4' : '#7ec8b2'}`,
+                background: '#fff',
+                boxShadow: idx === 0
+                  ? '0 4px 24px 0 rgba(245, 231, 196, 0.10)'
+                  : '0 4px 24px 0 rgba(126, 200, 178, 0.10)',
+              }}
+            >
+              <div className="flex flex-col gap-2">
+                <span className="text-xs text-neutral-400 mb-1">{new Date(note.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
+                <span className="serif text-2xl md:text-3xl font-semibold text-neutral-900 group-hover:underline mb-2">{note.title}</span>
+                <span className="text-base text-neutral-600 line-clamp-3">{note.excerpt}</span>
+              </div>
+              <span className="mt-8 text-sm text-neutral-300 group-hover:text-neutral-500 transition self-end">Read &rarr;</span>
+            </a>
+          ))}
+        </div>
       </div>
+      <footer className="w-full flex justify-center mt-20 mb-6">
+        <p className="text-xs text-neutral-300 text-center max-w-xl px-4">
+          Disclaimer: All content is personal opinion and for personal purposes only.
+        </p>
+      </footer>
     </main>
   );
 }
