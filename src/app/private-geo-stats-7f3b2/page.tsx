@@ -1,11 +1,16 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { createClient } from '@libsql/client';
+
+const db = createClient({
+  url: process.env.TURSO_DATABASE_URL!,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
 
 async function getGeoLogs() {
-  const logPath = path.join(process.cwd(), 'geo-log.json');
   try {
-    const data = await fs.readFile(logPath, 'utf-8');
-    return JSON.parse(data).reverse(); // most recent first
+    const result = await db.execute({
+      sql: 'SELECT * FROM geo_logs ORDER BY timestamp DESC LIMIT 200',
+    });
+    return result.rows;
   } catch {
     return [];
   }
