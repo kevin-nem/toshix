@@ -59,14 +59,14 @@ export default function MemoryClient({ note }: { note: any }) {
                 <p key={i} className="font-semibold" style={{ textAlign: "justify", textJustify: "inter-word", marginBottom: i === content.paragraphs.length - 1 ? 0 : "2.1rem" }}>{para}</p>
               );
             }
-            // Bold any paragraph in 'Still Becoming' that was meant to be bold (surrounded by ** in the text)
-            if (typeof content.title === 'string' && content.title === 'Still Becoming' && para.startsWith('**') && para.endsWith('**')) {
+            // Bold any paragraph surrounded by ** (any language)
+            if (para.startsWith('**') && para.endsWith('**')) {
               return (
                 <p key={i} className="font-semibold" style={{ textAlign: "justify", textJustify: "inter-word", marginBottom: i === content.paragraphs.length - 1 ? 0 : "2.1rem" }}>{para.replace(/^\*\*/, '').replace(/\*\*$/, '')}</p>
               );
             }
-            // Italic any paragraph in 'Still Becoming' that was meant to be italic (surrounded by * in the text, but not **)
-            if (typeof content.title === 'string' && content.title === 'Still Becoming' && para.startsWith('*') && para.endsWith('*') && !(para.startsWith('**') && para.endsWith('**'))) {
+            // Italic any paragraph surrounded by * (but not **), any language
+            if (para.startsWith('*') && para.endsWith('*') && !(para.startsWith('**') && para.endsWith('**'))) {
               return (
                 <p key={i} className="italic" style={{ textAlign: "justify", textJustify: "inter-word", marginBottom: i === content.paragraphs.length - 1 ? 0 : "2.1rem" }}>{para.replace(/^\*/, '').replace(/\*$/, '')}</p>
               );
