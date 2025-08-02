@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import React from "react";
 
 export default function MemoryClient({ note }: { note: any }) {
   const [lang, setLang] = useState<'en' | 'fr'>('en');
@@ -41,10 +42,10 @@ export default function MemoryClient({ note }: { note: any }) {
             const isEpilogue = (lang === 'en' && para.startsWith('Chance, choice, and the connections that leave a mark')) || (lang === 'fr' && para.startsWith('Le hasard, les choix, et les rencontres qui marquent'));
             if (isEpilogue) {
               return (
-                <>
-                  <hr key="epilogue-divider" className="my-10 border-t border-neutral-300 opacity-60 w-2/3 mx-auto" />
-                  <h2 key="epilogue-heading" className="serif text-xl md:text-2xl font-semibold text-center text-neutral-700 mb-6 mt-2 tracking-tight">{para}</h2>
-                </>
+                <React.Fragment key={i}>
+                  <hr className="my-10 border-t border-neutral-300 opacity-60 w-2/3 mx-auto" />
+                  <h2 className="serif text-xl md:text-2xl font-semibold text-center text-neutral-700 mb-6 mt-2 tracking-tight">{para}</h2>
+                </React.Fragment>
               );
             }
             const epilogueStart = content.paragraphs.findIndex((p: string) => (lang === 'en' && p.startsWith('Chance, choice, and the connections that leave a mark')) || (lang === 'fr' && p.startsWith('Le hasard, les choix, et les rencontres qui marquent')));

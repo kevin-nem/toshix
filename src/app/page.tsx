@@ -32,35 +32,31 @@ export default async function Home() {
 
   return (
     <main
-      className="min-h-screen w-full flex flex-col items-center justify-center relative"
+      className="min-h-screen w-full flex flex-col items-center justify-center relative font-sans"
       style={{
-        fontFamily: "Inter, sans-serif",
-        background: "#ece9e2", // warm gray
+        background: "#ece9e2",
         backgroundImage: NOISE_SVG,
         backgroundBlendMode: "overlay",
       }}
     >
       <div className="fixed top-5 right-5 flex gap-2 z-50"></div>
       <div className="w-full max-w-6xl mx-auto pt-32 pb-24 px-4">
-        <h1 className="serif text-4xl md:text-5xl font-normal text-left text-neutral-900 mb-16 tracking-tight">Notes</h1>
+        <h1 className="font-serif text-4xl md:text-5xl font-normal text-left text-neutral-900 mb-16 tracking-tight">Notes</h1>
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 justify-center items-stretch">
           {notes.map((note, idx) => (
             <a
               key={note.slug}
               href={`/memories/${note.slug}`}
-              className="group flex-1 min-w-[260px] max-w-xl rounded-2xl shadow-lg border border-neutral-200 hover:border-neutral-400 transition p-8 flex flex-col justify-between relative overflow-hidden"
-              style={{
-                borderLeft: `10px solid ${note.slug === 'still-becoming' ? '#7ec8b2' : '#f5e7c4'}`,
-                background: '#fff',
-                boxShadow: note.slug === 'still-becoming'
-                  ? '0 4px 24px 0 rgba(126, 200, 178, 0.10)'
-                  : '0 4px 24px 0 rgba(245, 231, 196, 0.10)',
-              }}
+              className={[
+                "group flex-1 min-w-[260px] max-w-xl rounded-2xl border border-neutral-200 hover:border-neutral-400 transition p-8 flex flex-col justify-between relative overflow-hidden bg-white",
+                "shadow-[0_4px_24px_0_rgba(126,200,178,0.10)]",
+                note.slug === 'still-becoming' ? 'border-l-[10px] border-sage' : 'border-l-[10px] border-beige',
+              ].join(' ')}
             >
               <div className="flex flex-col gap-2">
                 <span className="text-xs text-neutral-400 mb-1">{new Date(note.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
-                <span className="serif text-2xl md:text-3xl font-semibold text-neutral-900 group-hover:underline mb-2">{note.title}</span>
-                <span className="text-base text-neutral-600 line-clamp-3">{note.excerpt}</span>
+                <span className="font-serif text-2xl md:text-3xl font-semibold text-neutral-900 group-hover:underline mb-2">{note.title}</span>
+                <span className="text-base text-neutral-600 line-clamp-3 font-sans leading-relaxed">{note.excerpt}</span>
               </div>
               <span className="mt-8 text-sm text-neutral-300 group-hover:text-neutral-500 transition self-end">Read &rarr;</span>
             </a>
